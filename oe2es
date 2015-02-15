@@ -1,0 +1,32 @@
+#!/bin/bash
+
+SOURCE_PREFIX="${HOME}/ownCloud/roms/saves/Super Nintendo/battery/";
+TARGET_PREFIX="${HOME}/ownCloud/roms/emulationstation-saves/saves/snes/";
+
+INPUT='';
+SOURCE='';
+TARGET='';
+COMMAND='cp -vf';
+while [[ $# > 0 ]]; do
+	arg="${1}";
+	shift;
+	case "${arg}" in
+		--bash-completion)
+			pushd "${SOURCE_PREFIX}" &>/dev/null;
+			ls "$(echo "${2}" | sed 's/\\//g')"*;
+			popd &>/dev/null;
+			exit 0;
+			;;
+		-l)
+			COMMAND='ls -al';
+			;;
+		*)
+			INPUT="${arg}";
+			;;
+	esac;
+done;
+SOURCE="${SOURCE_PREFIX}${arg}";
+TARGET="${TARGET_PREFIX}$(echo "${INPUT}" | sed 's/\.sav$/\.srm/')";
+
+$COMMAND "${SOURCE}" "${TARGET}";
+
