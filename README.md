@@ -6,3 +6,7 @@ This is an assortment of simple shell scripts I've written to make my life easie
 
 These are simple scripts that copy save states and battery files between retroarch ("es" for emulationstation) and OpenEmu ("oe").
 
+# fix-kimai-invoice
+
+This takes the CSV output of an "export" from Kimai on stdin, strips out the stuff I don't want, fixes the date format, and outputs it on stdout.  May be useful as a starting point if you're also using Kimai for invoicing.
+
