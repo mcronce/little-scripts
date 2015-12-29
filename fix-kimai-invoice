@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ "$#" -ne 1 ]; then
+	echo 'Must pass year' > /dev/stderr;
+	exit 1;
+fi;
+
+awk -F, '{print $1","$2","$3","$4","$7","$10","$11}' | sed 's/^\([0-9]\{2\}\)\.\([0-9]\{2\}\)\./'"$1"'-\2-\1/' | sed "s/h'm,/Time,/" | awk -F, '/Overnight/ {print $1",,,,"$5","$6","$7} !/Overnight/ {print}'
+
